@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Pubtracker2FrontEnd.Models.ptPublication>
+@{ ViewBag.Title = "Publications";}
+
+<h2>Publications</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>PublicationId</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Series</th>
+        <th>Division</th>
+        <th>Contact</th>
+        <th>Status</th>
+        <th>StatusTime</th>
+        <th>Remarks</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Take(10))
+    {
+    <tr>
+    <td>@Html.ActionLink("Details", "Details", new { id = item.PublicationId })</td>
+    <td>@Html.DisplayFor(modelItem => item.PublicationId)</td>
+    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+    <td>@Html.DisplayFor(modelItem => item.Type.TypeName)</td>
+    <td>@Html.DisplayFor(modelItem => item.Series)</td>
+    <td>@Html.DisplayFor(modelItem => item.Division.DivisionName)</td>
+    <td>@Html.DisplayFor(modelItem => item.Roles.Find(x => x.RoleName == "Contact").UserID)</td>
+    @{
+        string parameterValue = item.Statuses.OrderByDescending(x => x.StepDateTime).First().StepName;
+    }
+    <td>@Html.DisplayFor(modelItem => parameterValue)</td>
+    @{
+        string parameterValue2 = item.Statuses.OrderByDescending(x => x.StepDateTime).First().StepDateTime.ToString();
+    }
+    <td>@Html.DisplayFor(modelItem => parameterValue2)</td>
+    <td>@Html.DisplayFor(modelItem => item.Remarks)</td>
+    <td>@Html.ActionLink("Edit", "Edit", new { id = item.PublicationId })</td>
+    <td>@Html.ActionLink("Delete", "Delete", new { id = item.PublicationId })</td>
+    </tr>
+    }
+</table>

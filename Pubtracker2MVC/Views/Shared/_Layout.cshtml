@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -20,13 +20,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Publications", "Index", "Publications")</li>
-                    <li>@Html.ActionLink("Administration", "Admin", "Home")</li>
-                    @*<li>@Html.ActionLink("Divisions", "Index", "Divisions")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                    <li>@Html.ActionLink("Steps", "Index", "Steps")</li>
-                    <li>@Html.ActionLink("Types", "Index", "Types")</li>
-                    <li>@Html.ActionLink("Users", "Index", "Users")</li>*@
+                    <li>@Html.ActionLink("Publications", "Index", "Publications", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Administration", "Admin", "Home", new { area = "" }, null)</li>
                 </ul>
             </div>
         </div>
@@ -35,7 +30,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Pubtracker2</p>
+            <p>&copy; @DateTime.Now.Year - Pubtrack2</p>
         </footer>
     </div>
 
