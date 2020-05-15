@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Pubtracker2MVC.Models.ptDivision>
+
+<h2>Divisions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DivisionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DivisionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DivisionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DivisionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {id = item.DivisionId}) |
+            @Html.ActionLink("Delete", "Delete", new {id = item.DivisionId})
+        </td>
+    </tr>
+}
+
+</table>

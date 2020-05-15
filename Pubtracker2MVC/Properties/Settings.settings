@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pubtracker2MVC.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RestServiceUrlLocal" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44336/api/</Value>
+    </Setting>
+    <Setting Name="RestServiceUrlRemote" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44336/api/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
