@@ -20,9 +20,7 @@ namespace Pubtracker2FrontEnd.Controllers
 
         // GET: Publications/Create
         public ActionResult Create()
-        {
-            return View(Pubtracker2FrontEnd.ptHelper.BlankPubVM()); 
-        }
+        { return View(Pubtracker2FrontEnd.ptHelper.BlankPubVM()); }
 
         // POST: Publications/Create
         [HttpPost]
@@ -88,18 +86,6 @@ namespace Pubtracker2FrontEnd.Controllers
             division.DivisionId = divisionValue;
             division.DivisionName = divisionText;
             p.vmPublication.Division = division;
-            //ptRoles pr = new ptRoles();
-            //pr.RoleId = "Contact";
-            //pr.RoleName = "Contact";
-            //pr.UserId = "None Assigned";
-            //p.vmPublication.Roles = new List<ptRoles>();
-            //p.vmPublication.Roles.Add(pr);
-            //ptStatus status = new ptStatus();
-            //status.StepId = "Define";
-            //status.StepName = "Define";
-            //status.StepDateTime = DateTime.Now;
-            //p.vmPublication.Statuses = new List<ptStatus>();
-            //p.vmPublication.Statuses.Add(status);
             if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
             { return RedirectToAction("Index"); }
             else
@@ -121,18 +107,28 @@ namespace Pubtracker2FrontEnd.Controllers
         }
 
         // GET: Publications/CreateRole
-        public ActionResult CreateRole(string pubid)
-        { return View(); }
+        public ActionResult CreateRole(string id)
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            return View(p); 
+        }
 
         // POST: Publications/CreateRole
         [HttpPost]
-        public ActionResult CreateRole(string pubid, FormCollection fc)
+        public ActionResult CreateRole(FormCollection fc)
         {
-            //if (Pubtracker2FrontEnd.ptHelper.Create<ptPublication>("publications", publication))
-            //{ return RedirectToAction("Index"); }
-            //else
-            //{ return View(publication); }
-            return View();
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            ptRoles pr = new ptRoles();
+            pr.RoleId = fc["Role"];
+            pr.RoleName = p.slRole.ToList().Find(x => x.Value == fc["Role"]).Text;
+            pr.UserId = fc["User"];
+            //p.vmPublication.Roles = new List<ptRoles>();
+            p.vmPublication.Roles.Add(pr);
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/"+ id); }
+            else
+            { return View(p); }
         }
         // GET: Publications/EditRole
         public ActionResult EditRole(string pubid, string roleid)

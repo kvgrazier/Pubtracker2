@@ -19,7 +19,7 @@
             <td>@Html.DisplayFor(model => model.Division.DivisionName)</td>
             <td>@Html.DisplayFor(model => model.Remarks)</td>
         </tr>
-        <tr><td>@Html.ActionLink("Create New Role", "CreateRole")</td></tr>
+        <tr><td>@Html.ActionLink("Create New Role", "CreateRole", new {id = Model.PublicationId })</td></tr>
         <tr>
             <th>RoleName</th>
             <th>UserId</th>
