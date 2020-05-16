@@ -130,14 +130,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DivisionViewModel.cs" />
     <Compile Include="Models\ptDivision.cs" />
     <Compile Include="Models\ptPublication.cs" />
     <Compile Include="Models\ptRole.cs" />
     <Compile Include="Models\ptRoles.cs" />
     <Compile Include="Models\ptStatus.cs" />
     <Compile Include="Models\ptStep.cs" />
+    <Compile Include="Models\TypeViewModel.cs" />
     <Compile Include="Models\ptType.cs" />
     <Compile Include="Models\ptUser.cs" />
+    <Compile Include="Models\PublicationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
+using Pubtracker2FrontEnd.Models;
 
 namespace Pubtracker2FrontEnd
 {
@@ -91,6 +94,97 @@ namespace Pubtracker2FrontEnd
                 return false;
             }//End Using
         }//End Edit
+
+        public static PublicationViewModel BlankPubVM()
+        {
+            PublicationViewModel pm = new PublicationViewModel();
+            pm.vmPublication = new ptPublication();
+            pm.slDivision = slDivisions();
+            pm.slRole = slRoles();
+            pm.slStep = slSteps();
+            pm.slType = slTypes();
+            pm.slUser = slUsers();
+            List<ptPublication> p = GetAll<ptPublication>("publications").ToList<ptPublication>();
+            var maxID = (from max in p
+                            where !String.IsNullOrEmpty(max.PublicationId)
+                            select Convert.ToInt32(max.PublicationId)).Max();
+            int ipubid = maxID + 1;
+            pm.vmPublication.PublicationId = ipubid.ToString();
+            return pm;
+        }//End BlankPubVM
+
+        public static PublicationViewModel EditPubVM(string id)
+        {
+            PublicationViewModel pm = new PublicationViewModel();
+            pm.vmPublication = GetOne<ptPublication>("publications", id);
+            pm.SelectedDivisionId = pm.vmPublication.Division.DivisionId;
+            pm.slDivision = slDivisions();
+            pm.slRole = slRoles();
+            pm.slStep = slSteps();
+            pm.SelectedTypeId = pm.vmPublication.Type.TypeId;
+            pm.slType = slTypes();
+            pm.slUser = slUsers();
+            return pm;
+        }//End BlankPubVM
+        private static IEnumerable<SelectListItem> slDivisions()
+        {
+            List<ptDivision> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptDivision>("divisions").ToList<ptDivision>();
+            var items = div.FindAll(d=>d.Active==true).Select(x =>
+                        new SelectListItem
+                        {
+                            Value = x.DivisionId,
+                            Text = x.DivisionName
+                        });
+            return new SelectList(items, "Value", "Text");
+        }//end slDivisions
+
+        private static IEnumerable<SelectListItem> slRoles()
+        {
+            List<ptRole> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptRole>("roles").ToList<ptRole>();
+            var items = div.FindAll(d => d.Active == true).Select(x =>
+                            new SelectListItem
+                            {
+                                Value = x.RoleId,
+                                Text = x.RoleName
+                            });
+            return new SelectList(items, "Value", "Text");
+        }
+
+        private static IEnumerable<SelectListItem> slSteps()
+        {
+            List<ptStep> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptStep>("Steps").ToList<ptStep>();
+            var items = div.FindAll(d => d.Active == true).Select(x =>
+                            new SelectListItem
+                            {
+                                Value = x.StepId,
+                                Text = x.StepName
+                            });
+            return new SelectList(items, "Value", "Text");
+        }
+
+        private static IEnumerable<SelectListItem> slTypes()
+        {
+            List<ptType> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptType>("Types").ToList<ptType>();
+            var items = div.FindAll(d => d.Active == true).Select(x =>
+                            new SelectListItem
+                            {
+                                Value = x.TypeId,
+                                Text = x.TypeName
+                            });
+            return new SelectList(items, "Value", "Text");
+        }
+
+        private static IEnumerable<SelectListItem> slUsers()
+        {
+            List<ptUser> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptUser>("Users").ToList<ptUser>();
+            var items = div.FindAll(d => d.Active == true).Select(x =>
+                            new SelectListItem
+                            {
+                                Value = x.UserId,
+                                Text = x.UserId
+                            });
+            return new SelectList(items, "Value", "Text");
+        }
 
     }//End Class ptHelper
 }//End Namespace
