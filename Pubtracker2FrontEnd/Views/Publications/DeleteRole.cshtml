@@ -16,12 +16,15 @@
         <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).UserId))</dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.vmPublication.PublicationId);
+        @Html.HiddenFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId));
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to Details", "Details")
         </div>
     }
 </div>

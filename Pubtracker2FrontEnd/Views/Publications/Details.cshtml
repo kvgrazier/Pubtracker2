@@ -31,11 +31,11 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
                 <td>@Html.DisplayFor(modelItem => item.UserId)</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { pubid = Model.PublicationId, roleid = item.RoleName })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { pubid = Model.PublicationId, roleid = item.RoleName })</td>
+                <td>@Html.ActionLink("Edit", "EditRole", new { pubid = Model.PublicationId, roleid = item.RoleId })</td>
+                <td>@Html.ActionLink("Delete", "DeleteRole", new { pubid = Model.PublicationId, roleid = item.RoleId })</td>
             </tr>
         }
-        <tr><td>@Html.ActionLink("Create New Status", "CreateStatus")</td></tr>
+        <tr><td>@Html.ActionLink("Create New Status", "CreateStatus", new { id = Model.PublicationId })</td></tr>
         <tr>
             <th>StatusName</th>
             <th>UserId</th>
@@ -47,8 +47,8 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.StepName)</td>
                 <td>@Html.DisplayFor(modelItem => item.StepDateTime)</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { pubid = Model.PublicationId, stepid = item.StepName })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { pubid = Model.PublicationId, stepid = item.StepName })</td>
+                <td>@Html.ActionLink("Edit", "EditStatus", new { pubid = Model.PublicationId, stepid = item.StepName })</td>
+                <td>@Html.ActionLink("Delete", "DeleteStatus", new { pubid = Model.PublicationId, stepid = item.StepName })</td>
             </tr>
         }
     </table>
