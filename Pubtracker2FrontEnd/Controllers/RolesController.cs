@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Microsoft.Win32.SafeHandles;
 using Pubtracker2FrontEnd.Models;
 
 namespace Pubtracker2FrontEnd.Controllers
@@ -14,7 +15,7 @@ namespace Pubtracker2FrontEnd.Controllers
         // GET: Roles/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ptRole());
         }
 
         // POST: Roles/Create

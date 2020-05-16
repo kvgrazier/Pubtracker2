@@ -5,11 +5,6 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2Json", "Pubtracker2Json\Pubtracker2Json.csproj", "{2D718A77-0505-4422-97E9-71F49BE31855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2MVC", "Pubtracker2MVC\Pubtracker2MVC.csproj", "{E45D07BD-A63D-4E8B-A313-9D0173E9CDD4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2D718A77-0505-4422-97E9-71F49BE31855} = {2D718A77-0505-4422-97E9-71F49BE31855}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2FrontEnd", "Pubtracker2FrontEnd\Pubtracker2FrontEnd.csproj", "{A33A8865-FCE2-4D51-98A0-FC5C5EF592D8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2D718A77-0505-4422-97E9-71F49BE31855} = {2D718A77-0505-4422-97E9-71F49BE31855}
@@ -25,10 +20,6 @@ Global
 		{2D718A77-0505-4422-97E9-71F49BE31855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D718A77-0505-4422-97E9-71F49BE31855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D718A77-0505-4422-97E9-71F49BE31855}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E45D07BD-A63D-4E8B-A313-9D0173E9CDD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E45D07BD-A63D-4E8B-A313-9D0173E9CDD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E45D07BD-A63D-4E8B-A313-9D0173E9CDD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E45D07BD-A63D-4E8B-A313-9D0173E9CDD4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A33A8865-FCE2-4D51-98A0-FC5C5EF592D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A33A8865-FCE2-4D51-98A0-FC5C5EF592D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A33A8865-FCE2-4D51-98A0-FC5C5EF592D8}.Release|Any CPU.ActiveCfg = Release|Any CPU

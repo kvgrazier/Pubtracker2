@@ -26,11 +26,11 @@
             <th></th>
             <th></th>
         </tr>
-        @foreach (var item in Model.Roles.FindAll(x => x.UserID != "NA"))
+        @foreach (var item in Model.Roles.FindAll(x => x.UserId != "NA"))
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
-                <td>@Html.DisplayFor(modelItem => item.UserID)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserId)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { pubid = Model.PublicationId, roleid = item.RoleName })</td>
                 <td>@Html.ActionLink("Delete", "Delete", new { pubid = Model.PublicationId, roleid = item.RoleName })</td>
             </tr>

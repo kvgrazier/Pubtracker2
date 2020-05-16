@@ -29,7 +29,7 @@
     <td>@Html.DisplayFor(modelItem => item.Type.TypeName)</td>
     <td>@Html.DisplayFor(modelItem => item.Series)</td>
     <td>@Html.DisplayFor(modelItem => item.Division.DivisionName)</td>
-    <td>@Html.DisplayFor(modelItem => item.Roles.Find(x => x.RoleName == "Contact").UserID)</td>
+    <td>@Html.DisplayFor(modelItem => item.Roles.Find(x => x.RoleName == "Contact").UserId)</td>
     @{
         string parameterValue = item.Statuses.OrderByDescending(x => x.StepDateTime).First().StepName;
     }

@@ -14,7 +14,7 @@ namespace Pubtracker2FrontEnd.Controllers
         // GET: Steps/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ptStep());
         }
 
         // POST: Steps/Create

@@ -19,7 +19,7 @@ namespace Pubtracker2FrontEnd.Controllers
 
         // GET: Publications/Create
         public ActionResult Create()
-        { return View(); }
+        { return View(new ptPublication()); }
 
         // POST: Publications/Create
         [HttpPost]

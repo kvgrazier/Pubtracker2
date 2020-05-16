@@ -14,7 +14,7 @@ namespace Pubtracker2FrontEnd.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ptUser());
         }
 
         // POST: Users/Create

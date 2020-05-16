@@ -14,7 +14,7 @@ namespace Pubtracker2FrontEnd.Controllers
         // GET: Divisions/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ptDivision());
         }
 
         // POST: Divisions/Create

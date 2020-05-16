@@ -31,12 +31,14 @@ namespace Pubtracker2FrontEnd
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(svcUrl);
-                var responseTask = client.GetAsync(area+"/"+id);
+                var responseTask = client.GetStringAsync(area+"/"+id);
                 responseTask.Wait();
-                var result = responseTask.Result;
-                var readTask = result.Content.ReadAsStringAsync();
-                readTask.Wait();
-                string json = readTask.Result;
+                string jsonResult = JsonConvert.DeserializeObject(responseTask.Result).ToString();
+                string json = jsonResult;
+                //var result = responseTask.Result;
+                //var readTask = result.Content.ReadAsStringAsync();
+                //readTask.Wait();
+                //string json = readTask.Result;
                 T item = JsonConvert.DeserializeObject<T>(json);
                 return item;
             }//End Using
