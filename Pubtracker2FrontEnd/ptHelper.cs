@@ -113,10 +113,10 @@ namespace Pubtracker2FrontEnd
             return pm;
         }//End BlankPubVM
 
-        public static PublicationViewModel EditPubVM(string id)
+        public static PublicationViewModel EditPubVM(string pubid )
         {
             PublicationViewModel pm = new PublicationViewModel();
-            pm.vmPublication = GetOne<ptPublication>("publications", id);
+            pm.vmPublication = GetOne<ptPublication>("publications", pubid);
             pm.SelectedDivisionId = pm.vmPublication.Division.DivisionId;
             pm.slDivision = slDivisions();
             pm.slRole = slRoles();

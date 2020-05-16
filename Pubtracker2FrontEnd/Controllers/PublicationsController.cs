@@ -123,7 +123,6 @@ namespace Pubtracker2FrontEnd.Controllers
             pr.RoleId = fc["Role"];
             pr.RoleName = p.slRole.ToList().Find(x => x.Value == fc["Role"]).Text;
             pr.UserId = fc["User"];
-            //p.vmPublication.Roles = new List<ptRoles>();
             p.vmPublication.Roles.Add(pr);
             if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
             { return RedirectToAction("Details/"+ id); }
@@ -132,36 +131,45 @@ namespace Pubtracker2FrontEnd.Controllers
         }
         // GET: Publications/EditRole
         public ActionResult EditRole(string pubid, string roleid)
-        { /*return View(Pubtracker2FrontEnd.ptHelper.GetOne<ptPublication>("publications", id));*/
-            return View();
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(pubid);
+            p.SelectedRoleId = roleid;
+            p.SelectedUserId = p.vmPublication.Roles.Find(x => x.RoleId == roleid).UserId;
+            return View(p);
         }
 
         // POST: Publications/EditRole
         [HttpPost]
-        public ActionResult EditRole(string pubid, string roleid, FormCollection collection)
+        public ActionResult EditRole(FormCollection fc)
         {
-            //if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", publication))
-            //{ return RedirectToAction("Index"); }
-            //else
-            //{ return View(publication); }
-            return View();
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            p.vmPublication.Roles.Find(x => x.RoleId == fc["Role"]).UserId = fc["User"];
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/" + id); }
+            else
+            { return View(p); }
         }
 
         // GET: Publications/DeleteRole
         public ActionResult DeleteRole(string pubid, string roleid)
-        {/* return View(Pubtracker2FrontEnd.ptHelper.GetOne<ptPublication>("publications", id));*/
-            return View();
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(pubid);
+            p.SelectedRoleId = roleid;
+            return View(p);
         }
 
         // POST: Publications/DeleteRole
         [HttpPost]
-        public ActionResult DeleteRole(string pubid, string roleid, FormCollection collection)
+        public ActionResult DeleteRole(FormCollection fc)
         {
-            //if (Pubtracker2FrontEnd.ptHelper.DeleteOne<ptPublication>("publications", id))
-            //{ return RedirectToAction("Index"); }
-            //else
-            //{ return View(); }
-            return View();
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            p.vmPublication.Roles.RemoveAll(x => x.RoleId == fc["RoleId"]);
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/" + id); }
+            else
+            { return View(p); }
         }
 
     }//end class
