@@ -1,0 +1,29 @@
+﻿@model Pubtracker2FrontEnd.Models.PublicationViewModel
+@{ ViewBag.Title = "Delete Status"; }
+
+<h4>Delete Status</h4>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>PublicationId</dt>
+        <dd>@Html.DisplayFor(model => model.vmPublication.PublicationId)</dd>
+        <dt>Step Id</dt>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepId)</dd>
+        <dt>Step Name</dt>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepName)</dd>
+        <dt>Date Time</dt>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepDateTime)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.vmPublication.PublicationId);
+        @Html.HiddenFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepId);
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Details/" + Model.vmPublication.PublicationId)
+        </div>
+    }
+</div>

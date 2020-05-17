@@ -1,0 +1,48 @@
+﻿@model Pubtracker2FrontEnd.Models.PublicationViewModel
+@{ ViewBag.Title = "Edit Status"; }
+
+<h4>Edit Status</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.vmPublication.PublicationId)
+    @Html.HiddenFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepId)
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Step Id</div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepId, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Step Name</div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.vmPublication.Statuses.Find(x => x.StepId == Model.SelectedStepId).StepName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Date Time</div>
+        <div class="col-md-10">
+            <input type="datetime-local" id="StepDateTime" name="StepDateTime" class="form-control" value=@Model.vmPublication.Statuses.Find(x=>x.StepId == Model.SelectedStepId).StepDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

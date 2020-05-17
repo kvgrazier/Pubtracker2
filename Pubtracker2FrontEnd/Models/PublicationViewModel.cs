@@ -20,5 +20,6 @@ namespace Pubtracker2FrontEnd.Models
         public IEnumerable<SelectListItem> slType { get; set; }
         public string SelectedUserId { get; set; }
         public IEnumerable<SelectListItem> slUser { get; set; }
+        public string NowTime { get; set; }
     }
 }

@@ -128,7 +128,8 @@ namespace Pubtracker2FrontEnd.Controllers
             { return RedirectToAction("Details/"+ id); }
             else
             { return View(p); }
-        }
+        }//End Create Role
+
         // GET: Publications/EditRole
         public ActionResult EditRole(string pubid, string roleid)
         {
@@ -171,6 +172,72 @@ namespace Pubtracker2FrontEnd.Controllers
             else
             { return View(p); }
         }//End Delete Role
+
+        // GET: Publications/CreateStatus
+        public ActionResult CreateStatus(string id)
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            return View(p);
+        }//End Create Status
+
+        // POST: Publications/CreateStatus
+        [HttpPost]
+        public ActionResult CreateStatus(FormCollection fc)
+        {
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            ptStatus pr = new ptStatus();
+            pr.StepId = fc["Step"];
+            pr.StepName = p.slStep.ToList().Find(x => x.Value == fc["Step"]).Text;
+            pr.StepDateTime = Convert.ToDateTime(fc["StepDateTime"]);
+            p.vmPublication.Statuses.Add(pr);
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/" + id); }
+            else
+            { return View(p); }
+        }//End Create Status
+
+        // GET: Publications/EditStatus
+        public ActionResult EditStatus(string pubid, string stepid)
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(pubid);
+            p.SelectedStepId = stepid;
+            return View(p);
+        }//End Edit Status
+
+        // POST: Publications/EditStatus
+        [HttpPost]
+        public ActionResult EditStatus(FormCollection fc)
+        {
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            p.vmPublication.Statuses.Find(x => x.StepId == fc["StepId"]).StepDateTime = Convert.ToDateTime(fc["StepDateTime"]);
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/" + id); }
+            else
+            { return View(p); }
+        }//End Edit Status
+
+        // GET: Publications/DeleteStatus
+        public ActionResult DeleteStatus(string pubid, string stepid)
+        {
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(pubid);
+            p.SelectedStepId = stepid;
+            return View(p);
+        }//End Delete Status
+
+        // POST: Publications/DeleteStatus
+        [HttpPost]
+        public ActionResult DeleteStatus(FormCollection fc)
+        {
+            string id = fc["vmPublication.PublicationId"].ToString();
+            PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
+            p.vmPublication.Statuses.RemoveAll(x => x.StepId == fc["StepId"]);
+            if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
+            { return RedirectToAction("Details/" + id); }
+            else
+            { return View(p); }
+        }//End Delete Status
 
     }//end class
 }//end namespace

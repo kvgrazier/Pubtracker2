@@ -124,8 +124,9 @@ namespace Pubtracker2FrontEnd
             pm.SelectedTypeId = pm.vmPublication.Type.TypeId;
             pm.slType = slTypes();
             pm.slUser = slUsers();
+            pm.NowTime = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
             return pm;
-        }//End BlankPubVM
+        }//End Edit PubVM
         private static IEnumerable<SelectListItem> slDivisions()
         {
             List<ptDivision> div = Pubtracker2FrontEnd.ptHelper.GetAll<ptDivision>("divisions").ToList<ptDivision>();

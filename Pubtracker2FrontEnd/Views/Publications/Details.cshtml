@@ -3,7 +3,7 @@
 
     @*<p>@Html.ActionLink("Back to List", "Index")</p>*@
     <table class="table">
-        <tr>
+        <tr bgcolor="#dae0eb">
             <th>PublicationId</th>
             <th>Title</th>
             <th>Type</th>
@@ -20,7 +20,7 @@
             <td>@Html.DisplayFor(model => model.Remarks)</td>
         </tr>
         <tr></tr>
-        <tr><th>@Html.ActionLink("Create New Role", "CreateRole", new { id = Model.PublicationId })</th>
+        <tr bgcolor="#dae0eb"><th>@Html.ActionLink("Create New Role", "CreateRole", new { id = Model.PublicationId })</th>
             <th>Role</th>
             <th>User</th>
             <th></th>
@@ -35,9 +35,9 @@
                 <td>@Html.ActionLink("Delete", "DeleteRole", new { pubid = Model.PublicationId, roleid = item.RoleId })</td>
             </tr>
         }
-        <tr><th>@Html.ActionLink("Create New Status", "CreateStatus", new { id = Model.PublicationId })</th>
+        <tr bgcolor="#dae0eb"><th>@Html.ActionLink("Create New Status", "CreateStatus", new { id = Model.PublicationId })</th>
             <th>Status</th>
-            <th>User</th>
+            <th>Date Time</th>
             <th></th>
             <th></th>
         </tr>

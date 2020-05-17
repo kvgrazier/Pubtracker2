@@ -219,6 +219,9 @@
     <Content Include="Views\Publications\DeleteRole.cshtml" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <Content Include="Views\Publications\CreateStatus.cshtml" />
+    <Content Include="Views\Publications\DeleteStatus.cshtml" />
+    <Content Include="Views\Publications\EditStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
