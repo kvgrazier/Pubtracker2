@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Pubtracker2FrontEnd.Models.ptType>
-<h2>Types</h2>
+@{ ViewBag.Title = "Types";}
+<h4>Types</h4>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -17,22 +18,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.TypeId}) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.TypeId})
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TypeId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TypeId })
+            </td>
+        </tr>
+    }
 
 </table>

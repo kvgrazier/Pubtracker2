@@ -1,7 +1,7 @@
 ﻿@model Pubtracker2FrontEnd.Models.ptPublication
 @{ ViewBag.Title = "Publication Details";}
-@*<h4>Publication Details</h4>*@
-    <p>@Html.ActionLink("Back to List", "Index")</p>
+
+    @*<p>@Html.ActionLink("Back to List", "Index")</p>*@
     <table class="table">
         <tr>
             <th>PublicationId</th>
@@ -19,32 +19,32 @@
             <td>@Html.DisplayFor(model => model.Division.DivisionName)</td>
             <td>@Html.DisplayFor(model => model.Remarks)</td>
         </tr>
-        <tr><td>@Html.ActionLink("Create New Role", "CreateRole", new {id = Model.PublicationId })</td></tr>
-        <tr>
-            <th>RoleName</th>
-            <th>UserId</th>
+        <tr></tr>
+        <tr><th>@Html.ActionLink("Create New Role", "CreateRole", new { id = Model.PublicationId })</th>
+            <th>Role</th>
+            <th>User</th>
             <th></th>
             <th></th>
         </tr>
         @foreach (var item in Model.Roles.FindAll(x => x.UserId != "NA"))
         {
-            <tr>
+            <tr><td></td>
                 <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
                 <td>@Html.DisplayFor(modelItem => item.UserId)</td>
                 <td>@Html.ActionLink("Edit", "EditRole", new { pubid = Model.PublicationId, roleid = item.RoleId })</td>
                 <td>@Html.ActionLink("Delete", "DeleteRole", new { pubid = Model.PublicationId, roleid = item.RoleId })</td>
             </tr>
         }
-        <tr><td>@Html.ActionLink("Create New Status", "CreateStatus", new { id = Model.PublicationId })</td></tr>
-        <tr>
-            <th>StatusName</th>
-            <th>UserId</th>
+        <tr><th>@Html.ActionLink("Create New Status", "CreateStatus", new { id = Model.PublicationId })</th>
+            <th>Status</th>
+            <th>User</th>
             <th></th>
             <th></th>
         </tr>
         @foreach (var item in Model.Statuses.OrderByDescending(x => x.StepDateTime))
         {
             <tr>
+                <td></td>
                 <td>@Html.DisplayFor(modelItem => item.StepName)</td>
                 <td>@Html.DisplayFor(modelItem => item.StepDateTime)</td>
                 <td>@Html.ActionLink("Edit", "EditStatus", new { pubid = Model.PublicationId, stepid = item.StepName })</td>
