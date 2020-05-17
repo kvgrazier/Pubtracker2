@@ -1,7 +1,7 @@
 ﻿@model Pubtracker2FrontEnd.Models.PublicationViewModel
-@{ ViewBag.Title = "Delete Role"; }
+@{ ViewBag.Title = "DeleteRole"; }
 
-<h2>Delete Role</h2>
+<h4>Delete Role</h4>
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <hr />
@@ -9,22 +9,21 @@
         <dt>PublicationId</dt>
         <dd>@Html.DisplayFor(model => model.vmPublication.PublicationId)</dd>
         <dt>RoleId</dt>
-        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId))</dd>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId)</dd>
         <dt>RoleName</dt>
-        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleName))</dd>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleName)</dd>
         <dt>UserId</dt>
-        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).UserId))</dd>
+        <dd>@Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).UserId)</dd>
     </dl>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.vmPublication.PublicationId);
-        @Html.HiddenFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId));
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Details", "Details")
-        </div>
-    }
+        @Html.HiddenFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId);
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Details/" + Model.vmPublication.PublicationId)
+                        </div>
+                    }
 </div>

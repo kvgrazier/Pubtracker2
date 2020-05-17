@@ -214,8 +214,8 @@
     <Content Include="Views\Publications\Delete.cshtml" />
     <Content Include="Views\Publications\Create.cshtml" />
     <Content Include="Views\Publications\CreateRole.cshtml" />
-    <Content Include="Views\Publications\DeleteRole.cshtml" />
     <Content Include="Views\Publications\EditRole.cshtml" />
+    <Content Include="Views\Publications\DeleteRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

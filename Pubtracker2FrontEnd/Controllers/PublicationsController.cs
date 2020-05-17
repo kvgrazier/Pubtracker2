@@ -157,7 +157,7 @@ namespace Pubtracker2FrontEnd.Controllers
             PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(pubid);
             p.SelectedRoleId = roleid;
             return View(p);
-        }
+        }//End Delete Role
 
         // POST: Publications/DeleteRole
         [HttpPost]
@@ -170,7 +170,7 @@ namespace Pubtracker2FrontEnd.Controllers
             { return RedirectToAction("Details/" + id); }
             else
             { return View(p); }
-        }
+        }//End Delete Role
 
     }//end class
 }//end namespace
