@@ -7,8 +7,8 @@ namespace Pubtracker2Json.Models
 {
     public class ptStep
     {
-        public string StepId;
-        public string StepName;
-        public Boolean Active;
+        public string StepId{ get; set; }
+        public string StepName{ get; set; }
+        public Boolean Active{ get; set; }
     }
 }

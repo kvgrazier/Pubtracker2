@@ -7,6 +7,7 @@ namespace Pubtracker2FrontEnd.Models
     public class ptPublication
     {
         public string PublicationId{ get; set; }
+        public int SortId { get; set; }
         public string Title{ get; set; }
         public TypeViewModel Type{ get; set; }
         public string Series{ get; set; }

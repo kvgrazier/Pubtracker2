@@ -7,8 +7,8 @@ namespace Pubtracker2Json.Models
 {
     public class ptRoles
     {
-        public string RoleId;
-        public string RoleName;
-        public string UserId;
+        public string RoleId{ get; set; }
+        public string RoleName{ get; set; }
+        public string UserId{ get; set; }
     }
 }

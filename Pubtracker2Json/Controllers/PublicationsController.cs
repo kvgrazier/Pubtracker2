@@ -5,6 +5,7 @@ using System.Web.Http;
 using Pubtracker2Json.Models;
 using System.IO;
 using System.Net.Http;
+using System.Linq;
 
 namespace Pubtracker2Json.Controllers
 {
@@ -14,7 +15,9 @@ namespace Pubtracker2Json.Controllers
         // GET: api/Publications
         public string Get()
         {
-            string rtnjson = File.ReadAllText(path);
+            string json = File.ReadAllText(path);
+            var items = JsonConvert.DeserializeObject<List<ptPublication>>(json);
+            string rtnjson = JsonConvert.SerializeObject(items.OrderByDescending(x => x.SortId).Take(20));
             return rtnjson;
         }
 

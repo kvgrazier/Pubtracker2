@@ -7,9 +7,9 @@ namespace Pubtracker2Json.Models
 {
     public class ptUser
     {
-        public string UserId;
-        public string LastName;
-        public string FirstName;
-        public Boolean Active;
+        public string UserId{ get; set; }
+        public string LastName{ get; set; }
+        public string FirstName{ get; set; }
+        public Boolean Active{ get; set; }
     }
 }

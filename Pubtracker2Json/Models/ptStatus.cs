@@ -7,8 +7,8 @@ namespace Pubtracker2Json.Models
 {
     public class ptStatus
     {
-        public string StepId;
-        public string StepName;
-        public DateTime StepDateTime;
+        public string StepId{ get; set; }
+        public string StepName{ get; set; }
+        public DateTime StepDateTime{ get; set; }
     }
 }

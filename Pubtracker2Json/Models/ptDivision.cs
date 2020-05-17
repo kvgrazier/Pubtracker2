@@ -7,8 +7,8 @@ namespace Pubtracker2Json.Models
 {
     public class ptDivision
     {
-        public string DivisionId;
-        public string DivisionName;
-        public Boolean Active;
+        public string DivisionId{ get; set; }
+        public string DivisionName{ get; set; }
+        public Boolean Active{ get; set; }
     }
 }

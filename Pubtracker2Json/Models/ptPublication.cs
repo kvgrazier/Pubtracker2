@@ -7,13 +7,14 @@ namespace Pubtracker2Json.Models
 {
     public class ptPublication
     {
-        public string PublicationId;
-        public string Title;
-        public ptType Type;
-        public string Series;
-        public ptDivision Division;
-        public ptRoles[] Roles;
-        public ptStatus[] Statuses;
-        public string Remarks;
+        public string PublicationId{ get; set; }
+        public int SortId { get; set; }
+        public string Title{ get; set; }
+        public ptType Type{ get; set; }
+        public string Series{ get; set; }
+        public ptDivision Division{ get; set; }
+        public ptRoles[] Roles{ get; set; }
+        public ptStatus[] Statuses{ get; set; }
+        public string Remarks{ get; set; }
     }
 }
