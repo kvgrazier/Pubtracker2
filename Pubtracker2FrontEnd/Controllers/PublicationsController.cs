@@ -145,7 +145,7 @@ namespace Pubtracker2FrontEnd.Controllers
         {
             string id = fc["vmPublication.PublicationId"].ToString();
             PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
-            p.vmPublication.Roles.Find(x => x.RoleId == fc["Role"]).UserId = fc["User"];
+            p.vmPublication.Roles.Find(x => x.RoleId == fc["RoleId"]).UserId = fc["User"];
             if (Pubtracker2FrontEnd.ptHelper.Edit<ptPublication>(id, "publications", p.vmPublication))
             { return RedirectToAction("Details/" + id); }
             else

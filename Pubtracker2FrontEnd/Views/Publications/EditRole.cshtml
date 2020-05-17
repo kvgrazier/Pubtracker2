@@ -10,13 +10,26 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.vmPublication.PublicationId)
+    @Html.HiddenFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId)
 
     <div class="form-group">
+        <div class="control-label col-md-2">Role Id</div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleId, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Role</div>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.vmPublication.Roles.Find(x => x.RoleId == Model.SelectedRoleId).RoleName, new { @class = "form-control" })
+        </div>
+    </div>
+    @*<div class="form-group">
         <div class="control-label col-md-2">Role</div>
         <div class="col-md-10">
             @Html.DropDownListFor(x => x.SelectedRoleId, Model.slRole, new { @id = "Role", @Name = "Role", @class = "form-control" })
         </div>
-    </div>
+    </div>*@
     <div class="form-group">
         <div class="control-label col-md-2">User</div>
         <div class="col-md-10">
