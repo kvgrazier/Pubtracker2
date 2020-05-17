@@ -12,8 +12,8 @@ namespace Pubtracker2FrontEnd
 {
     public static class ptHelper
     {
-        private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocal;
-       // private static string svcUrl = PubtrackerMVC.Properties.Settings.Default.RestServiceUrlRemote;
+       // private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocal;
+        private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlRemote;
         public static IEnumerable<T> GetAll<T>(string area)
         {
             IEnumerable<T> items = null;

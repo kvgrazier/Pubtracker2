@@ -34,7 +34,7 @@ namespace Pubtracker2FrontEnd.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44336/api/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://pubtrackerrest888.azurewebsites.net/api/")]
         public string RestServiceUrlRemote {
             get {
                 return ((string)(this["RestServiceUrlRemote"]));
