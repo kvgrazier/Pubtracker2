@@ -110,6 +110,7 @@ namespace Pubtracker2FrontEnd
                             select Convert.ToInt32(max.PublicationId)).Max();
             int ipubid = maxID + 1;
             pm.vmPublication.PublicationId = ipubid.ToString();
+            pm.vmPublication.SortId = ipubid;
             return pm;
         }//End BlankPubVM
 

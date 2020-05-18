@@ -28,6 +28,7 @@ namespace Pubtracker2FrontEnd.Controllers
         {
             PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.BlankPubVM();
             p.vmPublication.PublicationId = fc["vmPublication.PublicationId"].ToString();
+            p.vmPublication.SortId = Convert.ToInt32(fc["vmPublication.SortId"].ToString());
             p.vmPublication.Title = fc["vmPublication.Title"];
             string typeValue = fc["Type"];
             p.vmPublication.Series = fc["vmPublication.Series"].ToString();
@@ -71,6 +72,7 @@ namespace Pubtracker2FrontEnd.Controllers
         {
             PublicationViewModel p = Pubtracker2FrontEnd.ptHelper.EditPubVM(id);
             p.vmPublication.PublicationId = fc["vmPublication.PublicationId"].ToString();
+            p.vmPublication.SortId = Convert.ToInt32(fc["vmPublication.SortId"].ToString());
             p.vmPublication.Title = fc["vmPublication.Title"];
             string typeValue = fc["Type"];
             p.vmPublication.Series = fc["vmPublication.Series"].ToString();
