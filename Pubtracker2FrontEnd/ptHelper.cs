@@ -12,14 +12,38 @@ namespace Pubtracker2FrontEnd
 {
     public static class ptHelper
     {
-        //private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocal;
-        private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlRemote;
+        //private static string svcUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+        private static string svcUrl()
+        {
+            string rtnUrl = "";
+            switch (Pubtracker2FrontEnd.Properties.Settings.Default.RestService)
+            {
+                case "RestServiceUrlCosmos":
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    break;
+                case "RestServiceUrlRemoteJson":
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlRemoteJson;
+                    break;
+                case "RestServiceUrlLocalSql":
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    break;
+                case "RestServiceUrlRemoteSql":
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    break;
+                default:
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    break;
+            }
+            return rtnUrl;
+        }
+
+
         public static IEnumerable<T> GetAll<T>(string area)
         {
             IEnumerable<T> items = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(svcUrl);
+                client.BaseAddress = new Uri(svcUrl());
                 var responseTask = client.GetStringAsync(area);
                 responseTask.Wait();
                 string jsonResult = JsonConvert.DeserializeObject(responseTask.Result).ToString();
@@ -33,7 +57,7 @@ namespace Pubtracker2FrontEnd
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(svcUrl);
+                client.BaseAddress = new Uri(svcUrl());
                 var responseTask = client.GetStringAsync(area+"/"+id);
                 responseTask.Wait();
                 string jsonResult = JsonConvert.DeserializeObject(responseTask.Result).ToString();
@@ -51,7 +75,7 @@ namespace Pubtracker2FrontEnd
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(svcUrl);
+                client.BaseAddress = new Uri(svcUrl());
                 var responseTask = client.DeleteAsync(area+"/"+id);
                 responseTask.Wait();
                 var result = responseTask.Result;
@@ -67,7 +91,7 @@ namespace Pubtracker2FrontEnd
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(svcUrl);
+                client.BaseAddress = new Uri(svcUrl());
                 var stringPayload = JsonConvert.SerializeObject(item);
                 var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
                 var responseTask = client.PostAsync(area, httpContent);
@@ -83,7 +107,7 @@ namespace Pubtracker2FrontEnd
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(svcUrl);
+                client.BaseAddress = new Uri(svcUrl());
                 var stringPayload = JsonConvert.SerializeObject(item);
                 var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
                 var responseTask = client.PutAsync(area+"/"+id, httpContent);

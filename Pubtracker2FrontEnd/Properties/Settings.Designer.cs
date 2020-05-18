@@ -26,18 +26,27 @@ namespace Pubtracker2FrontEnd.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44336/api/")]
-        public string RestServiceUrlLocal {
+        public string RestServiceUrlLocalJson {
             get {
-                return ((string)(this["RestServiceUrlLocal"]));
+                return ((string)(this["RestServiceUrlLocalJson"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://pubtrackerrest888.azurewebsites.net/api/")]
-        public string RestServiceUrlRemote {
+        public string RestServiceUrlRemoteJson {
             get {
-                return ((string)(this["RestServiceUrlRemote"]));
+                return ((string)(this["RestServiceUrlRemoteJson"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RestServiceUrlLocalJson")]
+        public string RestService {
+            get {
+                return ((string)(this["RestService"]));
             }
         }
     }

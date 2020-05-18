@@ -10,9 +10,8 @@ namespace Pubtracker2Sql.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return View();
         }
+
     }
 }
