@@ -13,7 +13,8 @@ namespace Pubtracker2Sql
 {
     public class ptsHelper
     {
-        private static string conn = WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString();
+        //private static string conn = WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString();
+        private static string conn = WebConfigurationManager.ConnectionStrings["pubtrackprod"].ConnectionString.ToString();
 
         public static List<ptDivision> GetAllDivisions()
         {
