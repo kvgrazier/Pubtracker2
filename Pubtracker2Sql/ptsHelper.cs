@@ -13,12 +13,13 @@ namespace Pubtracker2Sql
 {
     public class ptsHelper
     {
+        private static string conn = WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString();
 
         public static List<ptDivision> GetAllDivisions()
         {
             List<ptDivision> items = new List<ptDivision>();
             string sql = "Select * from pubtrack.tblDivisions;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptDivision item = new ptDivision();
@@ -34,7 +35,7 @@ namespace Pubtracker2Sql
         {
             List<ptRole> items = new List<ptRole>();
             string sql = "Select * from pubtrack.tblRoles;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptRole item = new ptRole();
@@ -50,7 +51,7 @@ namespace Pubtracker2Sql
         {
             List<ptStep> items = new List<ptStep>();
             string sql = "Select * from pubtrack.tblSteps;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptStep item = new ptStep();
@@ -66,7 +67,7 @@ namespace Pubtracker2Sql
         {
             List<ptType> items = new List<ptType>();
             string sql = "Select * from pubtrack.tblTypes;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptType item = new ptType();
@@ -82,7 +83,7 @@ namespace Pubtracker2Sql
         {
             List<ptUser> items = new List<ptUser>();
             string sql = "Select * from pubtrack.tblUsers;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptUser item = new ptUser();
@@ -100,7 +101,7 @@ namespace Pubtracker2Sql
             List<SqlParameter> myParameters = new List<SqlParameter>();
             List<ptPublication> items = new List<ptPublication>();
             string sql = "Select * from pubtrack.Publication;";
-            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            DataSet ds = ExecuteSPDataSetText(sql, conn);
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptPublication item = new ptPublication();
@@ -120,7 +121,7 @@ namespace Pubtracker2Sql
 
         public static void ExcecuteSql(string sql)
         {
-            ExecuteNonQueryText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            ExecuteNonQueryText(sql, conn);
         }//End Delete
         private static DataSet ExecuteSPDataSetStoredProc(string ProcName, string ConnString, List<SqlParameter> InputParms)
     {
@@ -228,7 +229,7 @@ namespace Pubtracker2Sql
         //    s6.SqlDbType = SqlDbType.VarChar;
         //    s8.Value = p.Remarks;
         //    myParameters.Add(s8);
-        //    ExecuteNonQueryStoreProc("[pubtrack].[spUpdatePublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
+        //    ExecuteNonQueryStoreProc("[pubtrack].[spUpdatePublication]", conn, myParameters);
         //}//End Update Publication
 
         //public static void CreatePublication(ptPublication p)
@@ -279,7 +280,7 @@ namespace Pubtracker2Sql
         //    s6.SqlDbType = SqlDbType.VarChar;
         //    s8.Value = p.Remarks;
         //    myParameters.Add(s8);
-        //    ExecuteNonQueryStoreProc("[pubtrack].[spInsertPublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
+        //    ExecuteNonQueryStoreProc("[pubtrack].[spInsertPublication]", conn, myParameters);
         //}//End Create Publication
 
     }// End Class
