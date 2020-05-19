@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2FrontEnd", "Pubt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2Sql", "Pubtracker2Sql\Pubtracker2Sql.csproj", "{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2Cosmos", "Pubtracker2Cosmos\Pubtracker2Cosmos.csproj", "{4057AFAD-A205-4968-8BB9-DA005BCC7510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4057AFAD-A205-4968-8BB9-DA005BCC7510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4057AFAD-A205-4968-8BB9-DA005BCC7510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4057AFAD-A205-4968-8BB9-DA005BCC7510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4057AFAD-A205-4968-8BB9-DA005BCC7510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
