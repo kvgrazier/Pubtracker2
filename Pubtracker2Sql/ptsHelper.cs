@@ -13,141 +13,12 @@ namespace Pubtracker2Sql
 {
     public class ptsHelper
     {
-        public static void ExcecuteSql(string sql)
-        { 
-           ExecuteNonQueryText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
-        }//End Delete 
-
-        public static void DeletePublication(string pubid)
-        {
-            List<SqlParameter> myParameters = new List<SqlParameter>();
-            SqlParameter s = new SqlParameter();
-            s.ParameterName = "PublicationId";
-            s.Value = pubid;
-            myParameters.Add(s);
-            ExecuteNonQueryStoreProc("[pubtrack].[spDeletePublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
-        }//End Delete publication
-
-        public static void UpdatePublication(ptPublication p)
-        {
-            List<SqlParameter> myParameters = new List<SqlParameter>();
-            SqlParameter s = new SqlParameter();
-            s.ParameterName = "@PublicationId";
-            s.SqlDbType = SqlDbType.VarChar;
-            s.Value = p.PublicationId;
-            myParameters.Add(s);
-            SqlParameter s1 = new SqlParameter();
-            s1.ParameterName = "@SortId";
-            s1.SqlDbType = SqlDbType.Int;
-            s1.Value = p.SortId;
-            myParameters.Add(s1);
-            SqlParameter s2 = new SqlParameter();
-            s2.ParameterName = "@Title";
-            s2.SqlDbType = SqlDbType.VarChar;
-            s2.Value = p.Title;
-            myParameters.Add(s2);
-            SqlParameter s3 = new SqlParameter();
-            s3.ParameterName = "@Type";
-            s3.SqlDbType = SqlDbType.VarChar;
-            s3.Value = JsonConvert.SerializeObject(p.Type);
-            myParameters.Add(s3);
-            SqlParameter s4 = new SqlParameter();
-            s4.ParameterName = "@Series";
-            s4.SqlDbType = SqlDbType.VarChar;
-            s4.Value = p.Series;
-            myParameters.Add(s4);
-            SqlParameter s5 = new SqlParameter();
-            s5.ParameterName = "@Division";
-            s5.SqlDbType = SqlDbType.NVarChar;
-            s5.Value = JsonConvert.SerializeObject(p.Division);
-            myParameters.Add(s5);
-            SqlParameter s6 = new SqlParameter();
-            s6.ParameterName = "@Roles";
-            s6.SqlDbType = SqlDbType.NVarChar;
-            s6.Value = JsonConvert.SerializeObject(p.Roles);
-            myParameters.Add(s6);
-            SqlParameter s7 = new SqlParameter();
-            s7.ParameterName = "@Statuses";
-            s7.SqlDbType = SqlDbType.NVarChar;
-            s7.Value = JsonConvert.SerializeObject(p.Statuses);
-            myParameters.Add(s7);
-            SqlParameter s8 = new SqlParameter();
-            s8.ParameterName = "@Remarks";
-            s6.SqlDbType = SqlDbType.VarChar;
-            s8.Value = p.Remarks;
-            myParameters.Add(s8);
-            ExecuteNonQueryStoreProc("[pubtrack].[spUpdatePublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
-        }//End Update Publication
-
-        public static void CreatePublication(ptPublication p)
-        {
-            List<SqlParameter> myParameters = new List<SqlParameter>();
-            SqlParameter s = new SqlParameter();
-            s.ParameterName = "@PublicationId";
-            s.SqlDbType = SqlDbType.VarChar;
-            s.Value = p.PublicationId;
-            myParameters.Add(s);
-            SqlParameter s1 = new SqlParameter();
-            s1.ParameterName = "@SortId";
-            s1.SqlDbType = SqlDbType.Int;
-            s1.Value = p.SortId;
-            myParameters.Add(s1);
-            SqlParameter s2 = new SqlParameter();
-            s2.ParameterName = "@Title";
-            s2.SqlDbType = SqlDbType.VarChar;
-            s2.Value = p.Title;
-            myParameters.Add(s2);
-            SqlParameter s3 = new SqlParameter();
-            s3.ParameterName = "@Type";
-            s3.SqlDbType = SqlDbType.VarChar;
-            s3.Value = JsonConvert.SerializeObject(p.Type);
-            myParameters.Add(s3);
-            SqlParameter s4 = new SqlParameter();
-            s4.ParameterName = "@Series";
-            s4.SqlDbType = SqlDbType.VarChar;
-            s4.Value = p.Series;
-            myParameters.Add(s4);
-            SqlParameter s5 = new SqlParameter();
-            s5.ParameterName = "@Division";
-            s5.SqlDbType = SqlDbType.NVarChar;
-            s5.Value = JsonConvert.SerializeObject(p.Division);
-            myParameters.Add(s5);
-            SqlParameter s6 = new SqlParameter();
-            s6.ParameterName = "@Roles";
-            s6.SqlDbType = SqlDbType.NVarChar;
-            s6.Value = JsonConvert.SerializeObject(p.Roles);
-            myParameters.Add(s6);
-            SqlParameter s7 = new SqlParameter();
-            s7.ParameterName = "@Statuses";
-            s7.SqlDbType = SqlDbType.NVarChar;
-            s7.Value = JsonConvert.SerializeObject(p.Statuses);
-            myParameters.Add(s7);
-            SqlParameter s8 = new SqlParameter();
-            s8.ParameterName = "@Remarks";
-            s6.SqlDbType = SqlDbType.VarChar;
-            s8.Value = p.Remarks;
-            myParameters.Add(s8);
-            ExecuteNonQueryStoreProc("[pubtrack].[spInsertPublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
-        }//End Create Publication
-
-        public static string GetAllPublicationsAsJson()
-        {
-            List<ptPublication> items = GetAllPublications();
-            return JsonConvert.SerializeObject(items.OrderByDescending(x => x.SortId).Take(10));
-        }//End GetOne
-
-        public static string GetOnePublicationAsJson(string pubid)
-        {
-            List<ptPublication> items = GetAllPublications();
-            ptPublication item = items.Find(x => x.PublicationId == pubid);
-            return JsonConvert.SerializeObject(item);
-        }//End GetAll
 
         public static List<ptDivision> GetAllDivisions()
         {
             List<ptDivision> items = new List<ptDivision>();
-
-            DataSet ds = ExecuteSPDataSetText("Divisions", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            string sql = "Select * from pubtrack.tblDivisions;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptDivision item = new ptDivision();
@@ -162,8 +33,8 @@ namespace Pubtracker2Sql
         public static List<ptRole> GetAllRoles()
         {
             List<ptRole> items = new List<ptRole>();
-
-            DataSet ds = ExecuteSPDataSetText("Roles", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            string sql = "Select * from pubtrack.tblRoles;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptRole item = new ptRole();
@@ -178,8 +49,8 @@ namespace Pubtracker2Sql
         public static List<ptStep> GetAllSteps()
         {
             List<ptStep> items = new List<ptStep>();
-
-            DataSet ds = ExecuteSPDataSetText("Steps", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            string sql = "Select * from pubtrack.tblSteps;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptStep item = new ptStep();
@@ -194,8 +65,8 @@ namespace Pubtracker2Sql
         public static List<ptType> GetAllTypes()
         {
             List<ptType> items = new List<ptType>();
-
-            DataSet ds = ExecuteSPDataSetText("Types", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            string sql = "Select * from pubtrack.tblTypes;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptType item = new ptType();
@@ -210,8 +81,8 @@ namespace Pubtracker2Sql
         public static List<ptUser> GetAllUsers()
         {
             List<ptUser> items = new List<ptUser>();
-
-            DataSet ds = ExecuteSPDataSetText("Users", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            string sql = "Select * from pubtrack.tblUsers;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptUser item = new ptUser();
@@ -228,8 +99,8 @@ namespace Pubtracker2Sql
         {
             List<SqlParameter> myParameters = new List<SqlParameter>();
             List<ptPublication> items = new List<ptPublication>();
-            
-            DataSet ds = ExecuteSPDataSet("[pubtrack].[spSelectPublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
+            string sql = "Select * from pubtrack.Publication;";
+            DataSet ds = ExecuteSPDataSetText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 ptPublication item = new ptPublication();
@@ -247,7 +118,11 @@ namespace Pubtracker2Sql
             return items;
         }//End GetAll
 
-    private static DataSet ExecuteSPDataSet(string ProcName, string ConnString, List<SqlParameter> InputParms)
+        public static void ExcecuteSql(string sql)
+        {
+            ExecuteNonQueryText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+        }//End Delete
+        private static DataSet ExecuteSPDataSetStoredProc(string ProcName, string ConnString, List<SqlParameter> InputParms)
     {
         DataSet dataSet = new DataSet();
         using (SqlConnection SqlConn = new SqlConnection(ConnString))
@@ -265,13 +140,11 @@ namespace Pubtracker2Sql
         return dataSet;
     }//End ExecuteSPDataSet
 
-
-        private static DataSet ExecuteSPDataSetText(string area, string ConnString)
+        private static DataSet ExecuteSPDataSetText(string sql, string ConnString)
         {
             DataSet dataSet = new DataSet();
             using (SqlConnection SqlConn = new SqlConnection(ConnString))
             {
-                string sql = "Select * from pubtrack.tbl" + area + ";"; 
                 SqlCommand Sqlcommand = new SqlCommand(sql, SqlConn);
                 Sqlcommand.CommandType = CommandType.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(Sqlcommand);
@@ -306,5 +179,108 @@ namespace Pubtracker2Sql
                 int rows = Sqlcommand.ExecuteNonQuery();
             }//using
         }// End ExecuteNonQuery Text
+
+        //public static void UpdatePublication(ptPublication p)
+        //{
+        //    List<SqlParameter> myParameters = new List<SqlParameter>();
+        //    SqlParameter s = new SqlParameter();
+        //    s.ParameterName = "@PublicationId";
+        //    s.SqlDbType = SqlDbType.VarChar;
+        //    s.Value = p.PublicationId;
+        //    myParameters.Add(s);
+        //    SqlParameter s1 = new SqlParameter();
+        //    s1.ParameterName = "@SortId";
+        //    s1.SqlDbType = SqlDbType.Int;
+        //    s1.Value = p.SortId;
+        //    myParameters.Add(s1);
+        //    SqlParameter s2 = new SqlParameter();
+        //    s2.ParameterName = "@Title";
+        //    s2.SqlDbType = SqlDbType.VarChar;
+        //    s2.Value = p.Title;
+        //    myParameters.Add(s2);
+        //    SqlParameter s3 = new SqlParameter();
+        //    s3.ParameterName = "@Type";
+        //    s3.SqlDbType = SqlDbType.VarChar;
+        //    s3.Value = JsonConvert.SerializeObject(p.Type);
+        //    myParameters.Add(s3);
+        //    SqlParameter s4 = new SqlParameter();
+        //    s4.ParameterName = "@Series";
+        //    s4.SqlDbType = SqlDbType.VarChar;
+        //    s4.Value = p.Series;
+        //    myParameters.Add(s4);
+        //    SqlParameter s5 = new SqlParameter();
+        //    s5.ParameterName = "@Division";
+        //    s5.SqlDbType = SqlDbType.NVarChar;
+        //    s5.Value = JsonConvert.SerializeObject(p.Division);
+        //    myParameters.Add(s5);
+        //    SqlParameter s6 = new SqlParameter();
+        //    s6.ParameterName = "@Roles";
+        //    s6.SqlDbType = SqlDbType.NVarChar;
+        //    s6.Value = JsonConvert.SerializeObject(p.Roles);
+        //    myParameters.Add(s6);
+        //    SqlParameter s7 = new SqlParameter();
+        //    s7.ParameterName = "@Statuses";
+        //    s7.SqlDbType = SqlDbType.NVarChar;
+        //    s7.Value = JsonConvert.SerializeObject(p.Statuses);
+        //    myParameters.Add(s7);
+        //    SqlParameter s8 = new SqlParameter();
+        //    s8.ParameterName = "@Remarks";
+        //    s6.SqlDbType = SqlDbType.VarChar;
+        //    s8.Value = p.Remarks;
+        //    myParameters.Add(s8);
+        //    ExecuteNonQueryStoreProc("[pubtrack].[spUpdatePublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
+        //}//End Update Publication
+
+        //public static void CreatePublication(ptPublication p)
+        //{
+        //    List<SqlParameter> myParameters = new List<SqlParameter>();
+        //    SqlParameter s = new SqlParameter();
+        //    s.ParameterName = "@PublicationId";
+        //    s.SqlDbType = SqlDbType.VarChar;
+        //    s.Value = p.PublicationId;
+        //    myParameters.Add(s);
+        //    SqlParameter s1 = new SqlParameter();
+        //    s1.ParameterName = "@SortId";
+        //    s1.SqlDbType = SqlDbType.Int;
+        //    s1.Value = p.SortId;
+        //    myParameters.Add(s1);
+        //    SqlParameter s2 = new SqlParameter();
+        //    s2.ParameterName = "@Title";
+        //    s2.SqlDbType = SqlDbType.VarChar;
+        //    s2.Value = p.Title;
+        //    myParameters.Add(s2);
+        //    SqlParameter s3 = new SqlParameter();
+        //    s3.ParameterName = "@Type";
+        //    s3.SqlDbType = SqlDbType.VarChar;
+        //    s3.Value = JsonConvert.SerializeObject(p.Type);
+        //    myParameters.Add(s3);
+        //    SqlParameter s4 = new SqlParameter();
+        //    s4.ParameterName = "@Series";
+        //    s4.SqlDbType = SqlDbType.VarChar;
+        //    s4.Value = p.Series;
+        //    myParameters.Add(s4);
+        //    SqlParameter s5 = new SqlParameter();
+        //    s5.ParameterName = "@Division";
+        //    s5.SqlDbType = SqlDbType.NVarChar;
+        //    s5.Value = JsonConvert.SerializeObject(p.Division);
+        //    myParameters.Add(s5);
+        //    SqlParameter s6 = new SqlParameter();
+        //    s6.ParameterName = "@Roles";
+        //    s6.SqlDbType = SqlDbType.NVarChar;
+        //    s6.Value = JsonConvert.SerializeObject(p.Roles);
+        //    myParameters.Add(s6);
+        //    SqlParameter s7 = new SqlParameter();
+        //    s7.ParameterName = "@Statuses";
+        //    s7.SqlDbType = SqlDbType.NVarChar;
+        //    s7.Value = JsonConvert.SerializeObject(p.Statuses);
+        //    myParameters.Add(s7);
+        //    SqlParameter s8 = new SqlParameter();
+        //    s8.ParameterName = "@Remarks";
+        //    s6.SqlDbType = SqlDbType.VarChar;
+        //    s8.Value = p.Remarks;
+        //    myParameters.Add(s8);
+        //    ExecuteNonQueryStoreProc("[pubtrack].[spInsertPublication]", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString(), myParameters);
+        //}//End Create Publication
+
     }// End Class
 }// End Namespace
