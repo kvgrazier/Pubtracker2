@@ -25,10 +25,10 @@ namespace Pubtracker2FrontEnd
                     rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlRemoteJson;
                     break;
                 case "RestServiceUrlLocalSql":
-                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalSql;
                     break;
                 case "RestServiceUrlRemoteSql":
-                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;
+                    rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalSql;
                     break;
                 default:
                     rtnUrl = Pubtracker2FrontEnd.Properties.Settings.Default.RestServiceUrlLocalJson;

@@ -43,10 +43,19 @@ namespace Pubtracker2FrontEnd.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RestServiceUrlLocalJson")]
+        [global::System.Configuration.DefaultSettingValueAttribute("RestServiceUrlLocalSql")]
         public string RestService {
             get {
                 return ((string)(this["RestService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44381/api/")]
+        public string RestServiceUrlLocalSql {
+            get {
+                return ((string)(this["RestServiceUrlLocalSql"]));
             }
         }
     }

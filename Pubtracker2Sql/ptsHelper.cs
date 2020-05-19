@@ -7,11 +7,17 @@ using System.Data.SqlClient;
 using Pubtracker2Sql.Models;
 using Newtonsoft.Json;
 using System.Web.Configuration;
+using System.Web.UI.WebControls;
 
 namespace Pubtracker2Sql
 {
     public class ptsHelper
     {
+        public static void ExcecuteSql(string sql)
+        { 
+           ExecuteNonQueryText(sql, WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+        }//End Delete 
+
         public static void DeletePublication(string pubid)
         {
             List<SqlParameter> myParameters = new List<SqlParameter>();
@@ -137,6 +143,87 @@ namespace Pubtracker2Sql
             return JsonConvert.SerializeObject(item);
         }//End GetAll
 
+        public static List<ptDivision> GetAllDivisions()
+        {
+            List<ptDivision> items = new List<ptDivision>();
+
+            DataSet ds = ExecuteSPDataSetText("Divisions", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                ptDivision item = new ptDivision();
+                item.DivisionId = r["DivisionId"].ToString();
+                item.DivisionName = r["DivisionName"].ToString();
+                item.Active = Convert.ToBoolean(r["Active"].ToString());
+                items.Add(item);
+            }
+            return items;
+        }//End GetAll Divisions
+
+        public static List<ptRole> GetAllRoles()
+        {
+            List<ptRole> items = new List<ptRole>();
+
+            DataSet ds = ExecuteSPDataSetText("Roles", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                ptRole item = new ptRole();
+                item.RoleId = r["RoleId"].ToString();
+                item.RoleName = r["RoleName"].ToString();
+                item.Active = Convert.ToBoolean(r["Active"].ToString());
+                items.Add(item);
+            }
+            return items;
+        }//End GetAll Roles
+
+        public static List<ptStep> GetAllSteps()
+        {
+            List<ptStep> items = new List<ptStep>();
+
+            DataSet ds = ExecuteSPDataSetText("Steps", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                ptStep item = new ptStep();
+                item.StepId = r["StepId"].ToString();
+                item.StepName = r["StepName"].ToString();
+                item.Active = Convert.ToBoolean(r["Active"].ToString());
+                items.Add(item);
+            }
+            return items;
+        }//End GetAll Steps
+
+        public static List<ptType> GetAllTypes()
+        {
+            List<ptType> items = new List<ptType>();
+
+            DataSet ds = ExecuteSPDataSetText("Types", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                ptType item = new ptType();
+                item.TypeId = r["TypeId"].ToString();
+                item.TypeName = r["TypeName"].ToString();
+                item.Active = Convert.ToBoolean(r["Active"].ToString());
+                items.Add(item);
+            }
+            return items;
+        }//End GetAll Types
+
+        public static List<ptUser> GetAllUsers()
+        {
+            List<ptUser> items = new List<ptUser>();
+
+            DataSet ds = ExecuteSPDataSetText("Users", WebConfigurationManager.ConnectionStrings["pubtrackdev"].ConnectionString.ToString());
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                ptUser item = new ptUser();
+                item.UserId = r["UserId"].ToString();
+                item.FirstName = r["FirstName"].ToString();
+                item.LastName = r["LastName"].ToString();
+                item.Active = Convert.ToBoolean(r["Active"].ToString());
+                items.Add(item);
+            }
+            return items;
+        }//End GetAll Users
+
         public static List<ptPublication> GetAllPublications()
         {
             List<SqlParameter> myParameters = new List<SqlParameter>();
@@ -160,7 +247,7 @@ namespace Pubtracker2Sql
             return items;
         }//End GetAll
 
-    public static DataSet ExecuteSPDataSet(string ProcName, string ConnString, List<SqlParameter> InputParms)
+    private static DataSet ExecuteSPDataSet(string ProcName, string ConnString, List<SqlParameter> InputParms)
     {
         DataSet dataSet = new DataSet();
         using (SqlConnection SqlConn = new SqlConnection(ConnString))
@@ -178,7 +265,22 @@ namespace Pubtracker2Sql
         return dataSet;
     }//End ExecuteSPDataSet
 
-    public static void ExecuteNonQueryStoreProc(string ProcName, string ConnString, List<SqlParameter> InputParms)
+
+        private static DataSet ExecuteSPDataSetText(string area, string ConnString)
+        {
+            DataSet dataSet = new DataSet();
+            using (SqlConnection SqlConn = new SqlConnection(ConnString))
+            {
+                string sql = "Select * from pubtrack.tbl" + area + ";"; 
+                SqlCommand Sqlcommand = new SqlCommand(sql, SqlConn);
+                Sqlcommand.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(Sqlcommand);
+                SqlConn.Open();
+                adapter.Fill(dataSet);
+            }//using
+            return dataSet;
+        }//End ExecuteSPDataSet
+        private static void ExecuteNonQueryStoreProc(string ProcName, string ConnString, List<SqlParameter> InputParms)
     {
         using (SqlConnection SqlConn = new SqlConnection(ConnString))
         {
@@ -192,6 +294,17 @@ namespace Pubtracker2Sql
             SqlConn.Open();
             int rows = Sqlcommand.ExecuteNonQuery();
         }//using
-    }// End ExecuteNonQueryStoredProc
+    }// End ExecuteNonQuery Stored Proc
+        private static void ExecuteNonQueryText(string sql, string ConnString)
+        {
+            using (SqlConnection SqlConn = new SqlConnection(ConnString))
+            {
+                SqlCommand Sqlcommand = new SqlCommand(sql, SqlConn);
+                Sqlcommand.CommandType = CommandType.Text;
+                Sqlcommand.CommandTimeout = 0;
+                SqlConn.Open();
+                int rows = Sqlcommand.ExecuteNonQuery();
+            }//using
+        }// End ExecuteNonQuery Text
     }// End Class
 }// End Namespace

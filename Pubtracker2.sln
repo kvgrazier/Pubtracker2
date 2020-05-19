@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2Json", "Pubtrack
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2FrontEnd", "Pubtracker2FrontEnd\Pubtracker2FrontEnd.csproj", "{A33A8865-FCE2-4D51-98A0-FC5C5EF592D8}"
 	ProjectSection(ProjectDependencies) = postProject
-		{2D718A77-0505-4422-97E9-71F49BE31855} = {2D718A77-0505-4422-97E9-71F49BE31855}
+		{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE} = {BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pubtracker2Sql", "Pubtracker2Sql\Pubtracker2Sql.csproj", "{BCFB2BD1-89BA-43A1-8E17-7802035F5CAE}"
